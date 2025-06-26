@@ -1,26 +1,10 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App - EduPilot360"/>
+  <div class="min-h-screen bg-background text-textPrimary">
+    <h1 class="text-3xl font-bold text-primary p-6">
+      ¡TailwindCSS está listo en EduPilot360!
+    </h1>
+    <div class="mx-auto mt-8 p-8 bg-red-500 border-8 border-blue-500 text-white">
+      ¡Este bloque es una prueba visual de TailwindCSS!
+    </div>
+  </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
