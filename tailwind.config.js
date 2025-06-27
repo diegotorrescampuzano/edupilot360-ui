@@ -1,10 +1,12 @@
 // tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // Define which files Tailwind should scan for classes
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  // Extend the default theme with custom colors
   theme: {
     extend: {
       colors: {
