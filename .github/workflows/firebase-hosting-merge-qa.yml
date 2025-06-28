@@ -45,7 +45,7 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ATTENDIFY_APP_KIRPALAMAR }}
           projectId: attendify-app-kirpalamar
-          channelId: qa
+          channelId: live
           target: qa
 
       - name: Notify deployment status (opcional)
