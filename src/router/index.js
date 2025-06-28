@@ -1,38 +1,76 @@
 // Import necessary functions and components for Vue Router
 import { createRouter, createWebHistory } from 'vue-router'
-// Import the main layout component
+// Import the main layout component for protected routes
 import AppLayout from '@/components/layouts/AppLayout.vue'
-// Import the login view component (renamed to multiword)
+// Import the login view component
 import AuthLogin from '@/views/auth/AuthLogin.vue'
-// Import the dashboard view component (renamed to multiword)
+// Import the dashboard view component
 import HomeDashboard from '@/views/home/HomeDashboard.vue'
+// Import Firebase auth instance to check authentication state
+import { auth } from '../firebase/config'
 
-// Define the application routes
+// Define application routes
 const routes = [
   {
-    // Route for the login page (public)
+    // Public route for login page
     path: '/auth/login',
-    component: AuthLogin
+    component: AuthLogin,
+    // Meta flag to indicate this route doesn't require authentication
+    meta: { requiresAuth: false }
   },
   {
-    // Main route that uses the AppLayout as a base for all protected routes
+    // Main protected route that uses the application layout
     path: '/',
     component: AppLayout,
-    // Child routes for the protected area (dashboard, etc.)
+    // Meta flag to indicate this route requires authentication
+    meta: { requiresAuth: true },
+    // Child routes within the protected layout
     children: [
-      // Redirect empty path to the home dashboard
-      { path: '', redirect: '/home' },
-      // Home dashboard route
+      // Default route redirects to home dashboard
+      { path: '', component: HomeDashboard },
+      // Explicit home dashboard route
       { path: 'home', component: HomeDashboard }
     ]
   }
 ]
 
-// Create the router instance with web history mode and the defined routes
+// Create router instance with web history mode
 const router = createRouter({
+  // Use HTML5 history mode for clean URLs
   history: createWebHistory(),
+  // Pass the defined routes
   routes
 })
 
-// Export the router for use in the main app
+// Global route guard to handle authentication redirection
+router.beforeEach(async (to, from, next) => {
+  // Check if the target route requires authentication
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  
+  // Get current user from Firebase auth
+  // Wrap in promise to handle async auth state
+  const currentUser = await new Promise((resolve) => {
+    // Subscribe to auth state changes
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      // Unsubscribe immediately after getting the first state
+      unsubscribe()
+      // Resolve with user object (or null if not authenticated)
+      resolve(user)
+    })
+  })
+
+  // Handle route access based on authentication status
+  if (requiresAuth && !currentUser) {
+    // Redirect to login if route requires auth and user is not authenticated
+    next('/auth/login')
+  } else if (!requiresAuth && currentUser && to.path === '/auth/login') {
+    // Redirect to home if user is authenticated but tries to access login page
+    next('/')
+  } else {
+    // Proceed to the requested route
+    next()
+  }
+})
+
+// Export the configured router for use in the main app
 export default router
