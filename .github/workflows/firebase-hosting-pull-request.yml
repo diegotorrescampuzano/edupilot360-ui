@@ -52,4 +52,4 @@ jobs:
           channelId: preview-${{ github.event.number }}
 
       - name: Notify preview status (opcional)
-        run: echo "Preview desplegado para PR #${{ github.event.number }}"
+        run: echo "Preview desplegado para PR ${{ github.event.number }}"
