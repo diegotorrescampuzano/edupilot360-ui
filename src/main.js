@@ -1,13 +1,13 @@
-// Import Vue core and the main App component
 import { createApp } from 'vue'
+import { createPinia } from 'pinia' // Remove if not using Pinia
 import App from './App.vue'
-// Import TailwindCSS global styles
-import './assets/main.css'
-// Import router configuration
 import router from './router'
+import './assets/main.css'
 
-// Create and mount the Vue app with the router
-createApp(App)
-  .use(router)
-  .mount('#app')
-  
+const app = createApp(App)
+
+// Use Pinia (remove if not using)
+app.use(createPinia())
+
+app.use(router)
+app.mount('#app')
