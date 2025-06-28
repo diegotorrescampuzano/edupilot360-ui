@@ -11,7 +11,7 @@
         />
       </div>
       <!-- Title -->
-      <h1 class="text-2xl font-bold text-center text-primary mb-6">Iniciar sesión</h1>
+      <h1 class="text-2xl font-bold text-center text-primary mb-6">Iniciar sesión test1</h1>
       <!-- Error message (friendly for user) -->
       <div v-if="friendlyError" class="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
         {{ friendlyError }}
