@@ -44,6 +44,7 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ATTENDIFY_APP_KIRPALAMAR }}
+          channelId: live
           projectId: attendify-app-kirpalamar
           target: main
 
