@@ -55,6 +55,25 @@ export const useAuthStore = defineStore('auth', {
         // Store a friendly error message for the user (in Spanish)
         this.errorMessage = 'No se pudo cerrar la sesión. Inténtalo de nuevo.'
       }
+    },
+    // Action to get the current user's ID token (for testing)
+    async getIdToken() {
+      if (!this.user) {
+        console.warn('No user is logged in');
+        return null;
+      }
+      // getIdToken() is an async method of the Firebase user object
+      const token = await this.user.getIdToken();
+      console.log('ID Token:', token);
+      // Optionally, copy to clipboard for convenience
+      try {
+        await navigator.clipboard.writeText(token);
+        console.log('Token copied to clipboard!');
+      } catch (e) {
+        // Clipboard API might not be available everywhere
+        console.warn('Could not copy token to clipboard:', e.message);
+      }
+      return token;
     }
   }
 })
