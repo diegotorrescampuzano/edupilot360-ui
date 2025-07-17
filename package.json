@@ -13,8 +13,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@coreui/chartjs": "^4.1.0",
+    "@coreui/coreui": "^5.4.1",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-vue": "^2.2.0",
+    "@coreui/utils": "^2.0.2",
+    "@coreui/vue": "^5.5.0",
+    "@coreui/vue-chartjs": "^3.0.0",
+    "@popperjs/core": "^2.11.8",
+    "chart.js": "^4.4.7",
     "firebase": "^11.9.1",
     "pinia": "^3.0.3",
+    "simplebar-vue": "^2.4.2",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1"
   },
@@ -22,6 +32,7 @@
     "@vitejs/plugin-vue": "^6.0.0",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
+    "sass": "^1.89.2",
     "tailwindcss": "^3.4.17",
     "vite": "^7.0.0"
   }

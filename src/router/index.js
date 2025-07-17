@@ -1,7 +1,7 @@
 // Import necessary functions and components for Vue Router
 import { createRouter, createWebHistory } from 'vue-router'
 // Import the main layout component for protected routes
-import AppLayout from '@/components/layouts/AppLayout.vue'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 // Import the login view component
 import AuthLogin from '@/views/auth/AuthLogin.vue'
 // Import the dashboard view component
@@ -21,15 +21,17 @@ const routes = [
   {
     // Main protected route that uses the application layout
     path: '/',
-    component: AppLayout,
+    component: DefaultLayout,
     // Meta flag to indicate this route requires authentication
     meta: { requiresAuth: true },
+    // Route name for navigation to show in the navigation bar (breadcrumbs)
+    name: 'Home',
     // Child routes within the protected layout
     children: [
       // Default route redirects to home dashboard
-      { path: '', component: HomeDashboard },
+      { path: '', component: HomeDashboard, name: 'Dashboard' },
       // Explicit home dashboard route
-      { path: 'home', component: HomeDashboard }
+      { path: 'home', component: HomeDashboard, name: 'Dashboard' }
     ]
   }
 ]
