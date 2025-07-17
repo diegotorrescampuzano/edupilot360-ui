@@ -24,12 +24,14 @@ const routes = [
     component: DefaultLayout,
     // Meta flag to indicate this route requires authentication
     meta: { requiresAuth: true },
+    // Route name for navigation to show in the navigation bar (breadcrumbs)
+    name: 'Home',
     // Child routes within the protected layout
     children: [
       // Default route redirects to home dashboard
-      { path: '', component: HomeDashboard },
+      { path: '', component: HomeDashboard, name: 'Dashboard' },
       // Explicit home dashboard route
-      { path: 'home', component: HomeDashboard }
+      { path: 'home', component: HomeDashboard, name: 'Dashboard' }
     ]
   }
 ]
