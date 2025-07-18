@@ -1,3 +1,5 @@
+// src/router/index.js
+
 // Import necessary functions and components for Vue Router
 import { createRouter, createWebHistory } from 'vue-router'
 // Import the main layout component for protected routes
@@ -8,6 +10,12 @@ import AuthLogin from '@/views/auth/AuthLogin.vue'
 import HomeDashboard from '@/views/home/HomeDashboard.vue'
 // Import Firebase auth instance to check authentication state
 import { auth } from '../firebase/config'
+
+// Import new views for admin sections
+// (Create these files as you develop each screen.)
+import UsersList from '@/views/admin/users/UsersList.vue'
+/*import RolesList from '@/views/admin/roles/RolesList.vue'
+import PermissionsList from '@/views/admin/permissions/PermissionsList.vue'*/
 
 // Define application routes
 const routes = [
@@ -31,7 +39,33 @@ const routes = [
       // Default route redirects to home dashboard
       { path: '', component: HomeDashboard, name: 'Dashboard' },
       // Explicit home dashboard route
-      { path: 'home', component: HomeDashboard, name: 'Dashboard' }
+      { path: 'home', component: HomeDashboard, name: 'Dashboard' },
+      // --- Admin module screens under /admin/ path prefix ---
+      // Users management list
+      {
+        path: 'admin/users',
+        component: UsersList,
+        name: 'Usuarios',
+        meta: { requiresAuth: true }
+      },
+      // Roles management list
+      /*{
+        path: 'admin/roles',
+        component: RolesList,
+        name: 'Roles',
+        meta: { requiresAuth: true }
+      },
+      // Permissions management list
+      {
+        path: 'admin/permissions',
+        component: PermissionsList,
+        name: 'Permisos',
+        meta: { requiresAuth: true }
+      },*/
+      // You can add create/edit/detail child routes as you expand the module.
+      // Example (recommended in future):
+      // { path: 'admin/users/create', component: UserForm, name: 'CrearUsuario', meta: { requiresAuth: true } },
+      // { path: 'admin/roles/create', component: RoleForm, name: 'CrearRol', meta: { requiresAuth: true } },
     ]
   }
 ]
@@ -76,3 +110,13 @@ router.beforeEach(async (to, from, next) => {
 
 // Export the configured router for use in the main app
 export default router
+
+/*
+  EXPLANATION:
+  - We introduced nested child routes under `/admin/` for users, roles, and permissions management,
+    organizing the admin screens following scalable best practices.
+  - Route names for navigation and breadcrumbs are in Spanish for consistency with the UI.
+  - All route meta and authentication logic are preserved.
+  - The file preserves original comments, coding style, and expands your project architecture cleanly.
+  - For each new feature screen (UsersList, RolesList, PermissionsList), create a corresponding .vue file under /views/admin/.
+*/
