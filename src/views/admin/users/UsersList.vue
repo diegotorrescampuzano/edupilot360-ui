@@ -13,24 +13,28 @@
     </CCol>
   </CRow>
 
-  <!-- Filters: search and status filter -->
-  <CRow class="mb-3">
+  <!-- Filters: search and status filter aligned horizontally and visually consistent -->
+  <CRow class="mb-3 align-items-end">
+    <!-- Search field with explicit label -->
     <CCol md="4">
       <CFormInput
         v-model="filters.query"
-        placeholder="Buscar por nombre, correo..."
+        label="Buscar"
+        placeholder="Por nombre o correo"
         @keyup.enter="fetchUsers"
       />
     </CCol>
+    <!-- Status dropdown with label for consistent alignment -->
     <CCol md="3">
       <CFormSelect
         v-model="filters.status"
+        label="Estado"
         :options="statusOptions"
         @change="fetchUsers"
-        label="Estado"
       />
     </CCol>
-    <CCol md="2">
+    <!-- Clear filters button aligned with inputs -->
+    <CCol md="2" class="d-flex align-items-end">
       <CButton color="secondary" variant="outline" @click="clearFilters">
         Limpiar filtros
       </CButton>
@@ -93,15 +97,16 @@
     </CCol>
   </CRow>
 
-  <!-- User creation/edit modal using a direct condition (original working version) -->
+  <!-- User creation/edit modal with balanced padding and visual separation -->
   <CModal :visible="showUserForm" @close="closeUserForm" alignment="center">
-  <UserForm
-    :user="selectedUser"
-    @save="onUserSaved"
-    @cancel="closeUserForm"
-  />
-</CModal>
-
+    <div class="pt-4 pb-4 px-4">
+      <UserForm
+        :user="selectedUser"
+        @save="onUserSaved"
+        @cancel="closeUserForm"
+      />
+    </div>
+  </CModal>
 </template>
 
 <script setup>
@@ -176,8 +181,8 @@ function onUserSaved(userData) {
 
 <!--
   EXPLANATION:
-  - This is the original, working version: the UserForm is toggled/shown inline via v-if, not inside a modal component.
-  - There are no custom CoreUI modal slots or sizing: the UserForm itself is responsible for layout, padding, and centering.
-  - This guarantees the form is always visible when showUserForm is true.
-  - All code comments and variable names are in English for development clarity; all UI text for users is in Spanish.
+  - Filters row now has both fields using labels (label="Buscar", label="Estado") for perfect visual alignment.
+  - The button "Limpiar filtros" is baseline-aligned via 'align-items-end' and d-flex.
+  - Modal for user creation/edition uses extra padding for a balanced, professional look.
+  - All user-facing labels remain in Spanish for clarity; all comments and logic in English.
 -->
